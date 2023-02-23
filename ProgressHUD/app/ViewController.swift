@@ -15,6 +15,8 @@ import UIKit
 class ViewController: UITableViewController {
 
 	@IBOutlet var cellText: UITableViewCell!
+    
+    let progressHUD = ProgressHUD()
 
 	private var types: [String] = []
 	private var actions1: [String] = []
@@ -41,7 +43,7 @@ class ViewController: UITableViewController {
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
-		title = "ProgressHUD"
+		title = "progressHUD"
 
 		actions1.append("Animation - No text")
 		actions1.append("Animation - Short text")
@@ -100,8 +102,8 @@ class ViewController: UITableViewController {
 		actions6.append("Cart")
 		actions6.append("Search")
 
-		ProgressHUD.colorAnimation = .systemBlue
-		ProgressHUD.colorProgress = .systemBlue
+		progressHUD.colorAnimation = .systemBlue
+		progressHUD.colorProgress = .systemBlue
 	}
 
 	// MARK: - Progress methods
@@ -112,11 +114,11 @@ class ViewController: UITableViewController {
 		timer = nil
 
 		var intervalCount: CGFloat = 0.0
-		ProgressHUD.showProgress(status, intervalCount/100)
+		progressHUD.showProgress(status, intervalCount/100)
 
 		timer = Timer.scheduledTimer(withTimeInterval: 0.025, repeats: true) { timer in
 			intervalCount += 1
-			ProgressHUD.showProgress(status, intervalCount/100)
+            self.progressHUD.showProgress(status, intervalCount/100)
 			if (intervalCount >= 100) {
 				self.actionProgressStop()
 			}
@@ -130,7 +132,7 @@ class ViewController: UITableViewController {
 		timer = nil
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-			ProgressHUD.showSucceed(interaction: false)
+            self.progressHUD.showSucceed(interaction: false)
 		}
 	}
 }
@@ -215,28 +217,28 @@ extension ViewController {
 		tableView.deselectRow(at: indexPath, animated: true)
 
 		if (indexPath.section == 0) && (indexPath.row == 1) { view.endEditing(true) 			}
-		if (indexPath.section == 0) && (indexPath.row == 2) { ProgressHUD.dismiss()				}
-		if (indexPath.section == 0) && (indexPath.row == 3) { ProgressHUD.remove()				}
+		if (indexPath.section == 0) && (indexPath.row == 2) { progressHUD.dismiss()				}
+		if (indexPath.section == 0) && (indexPath.row == 3) { progressHUD.remove()				}
 
 		if (indexPath.section == 1) {
-			if (indexPath.row == 0) { ProgressHUD.show();			status = nil				}
-			if (indexPath.row == 1) { ProgressHUD.show(textShort);	status = textShort			}
-			if (indexPath.row == 2) { ProgressHUD.show(textLong);	status = textLong			}
+			if (indexPath.row == 0) { progressHUD.show();			status = nil				}
+			if (indexPath.row == 1) { progressHUD.show(textShort);	status = textShort			}
+			if (indexPath.row == 2) { progressHUD.show(textLong);	status = textLong			}
 		}
 
 		if (indexPath.section == 2)	{
-			if (indexPath.row == 0)	 { ProgressHUD.animationType = .systemActivityIndicator		}
-			if (indexPath.row == 1)	 { ProgressHUD.animationType = .horizontalCirclesPulse		}
-			if (indexPath.row == 2)	 { ProgressHUD.animationType = .lineScaling					}
-			if (indexPath.row == 3)	 { ProgressHUD.animationType = .singleCirclePulse			}
-			if (indexPath.row == 4)	 { ProgressHUD.animationType = .multipleCirclePulse			}
-			if (indexPath.row == 5)	 { ProgressHUD.animationType = .singleCircleScaleRipple		}
-			if (indexPath.row == 6)	 { ProgressHUD.animationType = .multipleCircleScaleRipple	}
-			if (indexPath.row == 7)	 { ProgressHUD.animationType = .circleSpinFade				}
-			if (indexPath.row == 8)	 { ProgressHUD.animationType = .lineSpinFade				}
-			if (indexPath.row == 9)	 { ProgressHUD.animationType = .circleRotateChase			}
-			if (indexPath.row == 10) { ProgressHUD.animationType = .circleStrokeSpin			}
-			ProgressHUD.show(status)
+			if (indexPath.row == 0)	 { progressHUD.animationType = .systemActivityIndicator		}
+			if (indexPath.row == 1)	 { progressHUD.animationType = .horizontalCirclesPulse		}
+			if (indexPath.row == 2)	 { progressHUD.animationType = .lineScaling					}
+			if (indexPath.row == 3)	 { progressHUD.animationType = .singleCirclePulse			}
+			if (indexPath.row == 4)	 { progressHUD.animationType = .multipleCirclePulse			}
+			if (indexPath.row == 5)	 { progressHUD.animationType = .singleCircleScaleRipple		}
+			if (indexPath.row == 6)	 { progressHUD.animationType = .multipleCircleScaleRipple	}
+			if (indexPath.row == 7)	 { progressHUD.animationType = .circleSpinFade				}
+			if (indexPath.row == 8)	 { progressHUD.animationType = .lineSpinFade				}
+			if (indexPath.row == 9)	 { progressHUD.animationType = .circleRotateChase			}
+			if (indexPath.row == 10) { progressHUD.animationType = .circleStrokeSpin			}
+			progressHUD.show(status)
 		}
 
 		if (indexPath.section == 3) {
@@ -246,48 +248,48 @@ extension ViewController {
 		}
 
 		if (indexPath.section == 4) {
-			if (indexPath.row == 0) { ProgressHUD.showProgress(0.1, interaction: true)			}
-			if (indexPath.row == 1) { ProgressHUD.showProgress(0.4, interaction: true)			}
-			if (indexPath.row == 2) { ProgressHUD.showProgress(0.6, interaction: true)			}
-			if (indexPath.row == 3) { ProgressHUD.showProgress(0.9, interaction: true)			}
+			if (indexPath.row == 0) { progressHUD.showProgress(0.1, interaction: true)			}
+			if (indexPath.row == 1) { progressHUD.showProgress(0.4, interaction: true)			}
+			if (indexPath.row == 2) { progressHUD.showProgress(0.6, interaction: true)			}
+			if (indexPath.row == 3) { progressHUD.showProgress(0.9, interaction: true)			}
 		}
 
 		if (indexPath.section == 5) {
-			if (indexPath.row == 0) { ProgressHUD.showSuccess()									}
-			if (indexPath.row == 1) { ProgressHUD.showSuccess(textSuccess)						}
-			if (indexPath.row == 2) { ProgressHUD.showError()									}
-			if (indexPath.row == 3) { ProgressHUD.showError(textError)							}
+			if (indexPath.row == 0) { progressHUD.showSuccess()									}
+			if (indexPath.row == 1) { progressHUD.showSuccess(textSuccess)						}
+			if (indexPath.row == 2) { progressHUD.showError()									}
+			if (indexPath.row == 3) { progressHUD.showError(textError)							}
 		}
 
 		if (indexPath.section == 6) {
-			if (indexPath.row == 0) { ProgressHUD.showSucceed()									}
-			if (indexPath.row == 1) { ProgressHUD.showSucceed(textSucceed)						}
-			if (indexPath.row == 2) { ProgressHUD.showFailed()									}
-			if (indexPath.row == 3) { ProgressHUD.showFailed(textFailed)						}
-			if (indexPath.row == 4) { ProgressHUD.showAdded()									}
-			if (indexPath.row == 5) { ProgressHUD.showAdded(textAdded)							}
+			if (indexPath.row == 0) { progressHUD.showSucceed()									}
+			if (indexPath.row == 1) { progressHUD.showSucceed(textSucceed)						}
+			if (indexPath.row == 2) { progressHUD.showFailed()									}
+			if (indexPath.row == 3) { progressHUD.showFailed(textFailed)						}
+			if (indexPath.row == 4) { progressHUD.showAdded()									}
+			if (indexPath.row == 5) { progressHUD.showAdded(textAdded)							}
 		}
 
 		if (indexPath.section == 7) {
-			if (indexPath.row == 0) { ProgressHUD.show(icon: .heart)							}
-			if (indexPath.row == 1) { ProgressHUD.show(icon: .doc)								}
-			if (indexPath.row == 2) { ProgressHUD.show(icon: .bookmark)							}
-			if (indexPath.row == 3) { ProgressHUD.show(icon: .moon)								}
-			if (indexPath.row == 4) { ProgressHUD.show(icon: .star)								}
-			if (indexPath.row == 5) { ProgressHUD.show(icon: .exclamation)						}
-			if (indexPath.row == 6) { ProgressHUD.show(icon: .flag)								}
-			if (indexPath.row == 7) { ProgressHUD.show(icon: .message)							}
-			if (indexPath.row == 8) { ProgressHUD.show(icon: .question)							}
-			if (indexPath.row == 9) { ProgressHUD.show(icon: .bolt)								}
-			if (indexPath.row == 10) { ProgressHUD.show(icon: .shuffle)							}
-			if (indexPath.row == 11) { ProgressHUD.show(icon: .eject)							}
-			if (indexPath.row == 12) { ProgressHUD.show(icon: .card)							}
-			if (indexPath.row == 13) { ProgressHUD.show(icon: .rotate)							}
-			if (indexPath.row == 14) { ProgressHUD.show(icon: .like)							}
-			if (indexPath.row == 15) { ProgressHUD.show(icon: .dislike)							}
-			if (indexPath.row == 16) { ProgressHUD.show(icon: .privacy)							}
-			if (indexPath.row == 17) { ProgressHUD.show(icon: .cart)							}
-			if (indexPath.row == 18) { ProgressHUD.show(icon: .search)							}
+			if (indexPath.row == 0) { progressHUD.show(icon: .heart)							}
+			if (indexPath.row == 1) { progressHUD.show(icon: .doc)								}
+			if (indexPath.row == 2) { progressHUD.show(icon: .bookmark)							}
+			if (indexPath.row == 3) { progressHUD.show(icon: .moon)								}
+			if (indexPath.row == 4) { progressHUD.show(icon: .star)								}
+			if (indexPath.row == 5) { progressHUD.show(icon: .exclamation)						}
+			if (indexPath.row == 6) { progressHUD.show(icon: .flag)								}
+			if (indexPath.row == 7) { progressHUD.show(icon: .message)							}
+			if (indexPath.row == 8) { progressHUD.show(icon: .question)							}
+			if (indexPath.row == 9) { progressHUD.show(icon: .bolt)								}
+			if (indexPath.row == 10) { progressHUD.show(icon: .shuffle)							}
+			if (indexPath.row == 11) { progressHUD.show(icon: .eject)							}
+			if (indexPath.row == 12) { progressHUD.show(icon: .card)							}
+			if (indexPath.row == 13) { progressHUD.show(icon: .rotate)							}
+			if (indexPath.row == 14) { progressHUD.show(icon: .like)							}
+			if (indexPath.row == 15) { progressHUD.show(icon: .dislike)							}
+			if (indexPath.row == 16) { progressHUD.show(icon: .privacy)							}
+			if (indexPath.row == 17) { progressHUD.show(icon: .cart)							}
+			if (indexPath.row == 18) { progressHUD.show(icon: .search)							}
 		}
 	}
 }
