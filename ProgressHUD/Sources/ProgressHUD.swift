@@ -317,6 +317,7 @@ public class ProgressHUD: UIView {
 			toolbarHUD?.clipsToBounds = true
 			toolbarHUD?.layer.cornerRadius = 10
 			toolbarHUD?.layer.masksToBounds = true
+            toolbarHUD?.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
 			viewBackground?.addSubview(toolbarHUD!)
 		}
 
